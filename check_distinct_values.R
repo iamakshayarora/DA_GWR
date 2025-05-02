@@ -112,6 +112,15 @@ merged_data_final <- merged_data %>% select(-c("Verification", "ResultTime","FkO
 
 merged_data_final <- merged_data_final %>% filter(Value != "-999") #removing missing values(-999)
 
+print(sum(merged_data_final$Value>0))#postiive values
+print(sum(merged_data_final$Value<0))#negative values
+
+#removing neagtive values mostly in Year 2013
+merged_data_final <- merged_data_final %>% filter(Value > 0)
+
+#removing >1000 Values
+merged_data_final <- merged_data_final %>% filter(Value < 1000)
+
 str(merged_data_final)
 summary(merged_data_final)
 

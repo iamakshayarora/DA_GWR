@@ -9,11 +9,20 @@ merged_data_final <- merged_data_final %>%
   mutate(
     Start = as.Date(Start),
     Year = year(Start),
-    Month = month(Start)
+    Month = month(Start),
+    Hour = hour(End)
+    
   )
+
+#datetime_obj <- strptime(merged_data_final$End, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
+
+#merged_data_final$Hour <- format(datetime_obj, "%H")
 
 merged_data_final <- merged_data_final %>%
   mutate(
+    Year = as.factor(`Year`),
+    Month = as.factor(`Month`),
+    Hour = as.factor(`Hour`),
     Air.Quality.Station.Type = as.factor(`Air Quality Station Type`),
     Air.Quality.Station.Area = as.factor(`Air Quality Station Area`),
     Inlet.Height = `Inlet Height`,
