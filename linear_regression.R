@@ -33,12 +33,22 @@ merged_data_final <- merged_data_final %>%
     Measurement.Method = as.factor(`Measurement Method`)
   )
 
-
+boxplot(Value ~ Year, data = merged_data_final)
+boxplot(Value ~ Month, data = merged_data_final)
+boxplot(Value ~ Hour, data = merged_data_final)
 boxplot(Value ~ Air.Quality.Station.Type, data = merged_data_final)
 boxplot(Value ~ Air.Quality.Station.Area, data = merged_data_final)
 boxplot(Value ~ Main.Emission.Sources, data = merged_data_final)
 boxplot(Value ~ Measurement.Type, data = merged_data_final)
 boxplot(Value ~ Measurement.Method, data = merged_data_final)
+
+summary(merged_data_final$Altitude)
+summary(merged_data_final$Inlet.Height)
+summary(merged_data_final$Kerb.Distance)
+summary(merged_data_final$Building.Distance)
+
+print(cor(merged_data_final[, c("Value", "Inlet.Height", "Kerb.Distance", "Building.Distance", "Altitude")]))
+
 
 sapply(merged_data_final[c(
   "Year",
@@ -86,12 +96,18 @@ merged_data_final$Measurement.Method <- as.character(merged_data_final$Measureme
 merged_data_final$Measurement.Method[is.na(merged_data_final$Measurement.Method)] <- "Unknown"
 merged_data_final$Measurement.Method <- as.factor(merged_data_final$Measurement.Method)
 
-
-
+nlevels(merged_data_final$Year)
+nlevels(merged_data_final$Month)
+nlevels(merged_data_final$Hour)
+nlevels(merged_data_final$Air.Quality.Station.Type)
+nlevels(merged_data_final$Air.Quality.Station.Area)
+nlevels(merged_data_final$Main.Emission.Sources)
+nlevels(merged_data_final$Measurement.Type)
+nlevels(merged_data_final$Measurement.Method)
 
 
 model_formula <- Value ~ 
-  Year + Month +
+  Year + Month + Hour + Altitude + 
   Air.Quality.Station.Type + Air.Quality.Station.Area + 
   Inlet.Height + Kerb.Distance + Building.Distance +
   Main.Emission.Sources +

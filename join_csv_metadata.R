@@ -21,3 +21,7 @@ print(head(merged_data))
 
 
 write.csv(head(merged_data, 100), "merged_data_sample.csv", row.names = FALSE)
+
+nrow(merged_data)
+
+str(merged_data)

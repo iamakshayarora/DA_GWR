@@ -148,7 +148,6 @@ validation_O3_df$predicted <- predict(lm_model_o3, newdata = validation_O3_df)
 #install.packages("Metrics")
 library(Metrics)
 
-# Assume 'actual_values' and 'predicted_values' are your vectors
 rmse_metrics <- rmse(validation_O3_df$Value, validation_O3_df$predicted)
 print(paste("RMSE (Metrics package):", rmse_metrics))
 
